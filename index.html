@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Dashboards - Power BI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 20px;
+            text-align: center;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            margin-top: 20px;
+        }
+        button {
+            background-color: #0078D4;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #005a9e;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Dashboard de Power BI</h1>
+
+    <!-- 🔗 Reemplaza esta URL con tu iframe público de Power BI -->
+    <iframe src="https://app.powerbi.com/view?r=TU_LINK_PUBLICO" allowFullScreen="true"></iframe>
+
+    <!-- 🔘 Botón para notificar a Teams -->
+    <button onclick="notificarTeams()">Notificar actualización a Teams</button>
+
+    <script>
+        function notificarTeams() {
+            fetch('https://tu_webhook_de_teams', { // ← reemplaza con tu URL de Webhook
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    text: "🔔 ¡El dashboard ha sido actualizado! Revisa los últimos cambios en Power BI."
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('✅ Notificación enviada a Teams.');
+                } else {
+                    alert('⚠️ Error al enviar notificación.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('❌ Error de red al enviar notificación.');
+            });
+        }
+    </script>
+
+</body>
+</html>
